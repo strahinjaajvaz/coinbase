@@ -1,6 +1,7 @@
-import React from "react";
-import { View, Text, Dimensions, ScrollView, StyleSheet } from "react-native";
+import React, { useRef } from "react";
+import { View, Dimensions, StyleSheet } from "react-native";
 import Step from "./Step";
+import Animated from "react-native-reanimated";
 
 const steps = [
   {
@@ -36,18 +37,30 @@ const styles = StyleSheet.create({
 });
 
 export default function Onboarding() {
+  const scrollReff = useRef<Animated.ScrollView>(null);
   return (
     <View style={styles.container}>
-      <ScrollView
+      <Animated.ScrollView
         horizontal
         snapToInterval={width}
         decelerationRate={0}
         snapToAlignment="center"
+        ref={scrollReff}
       >
         {steps.map((step, i) => (
-          <Step key={i} {...step} />
+          <Step
+            key={i}
+            {...step}
+            onPress={() => {
+              if (scrollReff.current) {
+                scrollReff.current
+                  .getNode()
+                  .scrollTo({ x: width * (i + 1), animated: true });
+              }
+            }}
+          />
         ))}
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   );
 }
