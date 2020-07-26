@@ -1,8 +1,6 @@
 import React, { useRef } from "react";
-import { View, Dimensions, StyleSheet } from "react-native";
+import { View, Dimensions, StyleSheet, Animated } from "react-native";
 import Step from "./Step";
-import Animated from "react-native-reanimated";
-import { useScrollHandler } from "react-native-redash";
 import Dot from "./Dot";
 
 const steps = [
@@ -34,14 +32,13 @@ const styles = StyleSheet.create({
   },
   dotsContainer: {
     flexDirection: "row",
-    bottom: 80,
+    bottom: 60,
     justifyContent: "center",
   },
 });
 
 export default function Onboarding() {
-  const scrollReff = useRef<Animated.ScrollView>(null);
-  const { scrollHandler, x } = useScrollHandler();
+  const scrollReff = useRef<Animated>(null);
 
   return (
     <View style={styles.container}>
@@ -51,7 +48,7 @@ export default function Onboarding() {
         decelerationRate={0}
         snapToAlignment="center"
         ref={scrollReff}
-        {...scrollHandler}
+        showsHorizontalScrollIndicator={false}
       >
         {steps.map((step, i) => (
           <Step
@@ -59,9 +56,10 @@ export default function Onboarding() {
             {...step}
             onPress={() => {
               if (scrollReff.current) {
-                scrollReff.current
-                  .getNode()
-                  .scrollTo({ x: width * (i + 1), animated: true });
+                scrollReff.current.scrollTo({
+                  x: width * (i + 1),
+                  animated: true,
+                });
               }
             }}
           />
