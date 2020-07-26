@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 
 import { SplashScreen as CoinbaseSplashScreen } from "./src/components";
+import { Onboarding } from "./src/Onboarding";
 
 export default class App extends React.Component {
   state = {
@@ -36,11 +37,7 @@ export default class App extends React.Component {
       return <CoinbaseSplashScreen />;
     }
 
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>SplashScreen Demo! 👋</Text>
-      </View>
-    );
+    return <Onboarding />;
   }
 }
 
