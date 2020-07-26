@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
 import { SplashScreen as CoinbaseSplashScreen } from "./src/components";
 import { Onboarding } from "./src/Onboarding";
@@ -43,14 +44,19 @@ export default class App extends React.Component {
 
 // Put any code you need to prepare your app in these functions
 async function performAPICalls() {
-  return new Promise((res, rej) => {
+  return new Promise((res) => {
     setTimeout(() => {
       res(true);
-    }, 5000);
+    }, 1000);
   });
 }
+
+let customFonts = {
+  "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
+};
+
 async function downloadAssets() {
-  return true;
+  await Font.loadAsync(customFonts);
 }
 
 const styles = StyleSheet.create({
