@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
-import { View, Dimensions, StyleSheet, Animated } from "react-native";
+import { View, Dimensions, StyleSheet } from "react-native";
+import Animated from "react-native-reanimated";
+import { useScrollHandler } from "react-native-redash";
 import Step from "./Step";
 import Dot from "./Dot";
 
@@ -20,6 +22,7 @@ const steps = [
     image: require("./assets/mobile_payments.svg"),
     label: ["You’re One Step", "Closer to Cashing", " Out Your Exchange"],
     text: "Our pay out process is the one of the fatest and guaranteed trusted",
+    onPress() {},
   },
 ];
 
@@ -38,8 +41,8 @@ const styles = StyleSheet.create({
 });
 
 export default function Onboarding() {
-  const scrollReff = useRef<Animated>(null);
-
+  const scrollReff = useRef<Animated.ScrollView>(null);
+  const { scrollHandler, x } = useScrollHandler();
   return (
     <View style={styles.container}>
       <Animated.ScrollView
@@ -51,23 +54,12 @@ export default function Onboarding() {
         showsHorizontalScrollIndicator={false}
       >
         {steps.map((step, i) => (
-          <Step
-            key={i}
-            {...step}
-            onPress={() => {
-              if (scrollReff.current) {
-                scrollReff.current.scrollTo({
-                  x: width * (i + 1),
-                  animated: true,
-                });
-              }
-            }}
-          />
+          <Step key={i} {...step} />
         ))}
       </Animated.ScrollView>
       <View style={styles.dotsContainer}>
         {steps.map((_, i) => (
-          <Dot key={i} current={true} index={i} />
+          <Dot key={i} current={new Animated.Node()} index={i} />
         ))}
       </View>
     </View>

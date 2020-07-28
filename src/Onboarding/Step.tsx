@@ -29,6 +29,7 @@ interface StepProps {
   image: any;
   label: string[];
   text: string;
+  hasButton?: boolean;
   onPress: () => void;
 }
 
@@ -36,6 +37,7 @@ export default function Step({
   label,
   image: { default: Image },
   text,
+  hasButton,
   onPress,
 }: StepProps) {
   return (
@@ -44,7 +46,7 @@ export default function Step({
         <Image width={225} height={287} />
         <HeadingText text={label} />
         <Text style={styles.text}>{text}</Text>
-        <Button text="continue" {...{ onPress }} />
+        {hasButton && <Button text="continue" {...{ onPress }} />}
       </View>
     </View>
   );
