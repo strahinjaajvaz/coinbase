@@ -58,16 +58,3 @@ let customFonts = {
 async function downloadAssets() {
   await Font.loadAsync(customFonts);
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#aabbcc",
-  },
-  text: {
-    color: "white",
-    fontWeight: "bold",
-  },
-});

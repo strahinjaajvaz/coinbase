@@ -4,6 +4,7 @@ import Animated from "react-native-reanimated";
 import { useScrollHandler } from "react-native-redash";
 import Step from "./Step";
 import Dot from "./Dot";
+import tailwind from "tailwind-rn";
 
 const steps = [
   {
@@ -28,23 +29,11 @@ const steps = [
 
 const { width } = Dimensions.get("window");
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#E5E5E5",
-  },
-  dotsContainer: {
-    flexDirection: "row",
-    bottom: 60,
-    justifyContent: "center",
-  },
-});
-
 export default function Onboarding() {
   const scrollReff = useRef<Animated.ScrollView>(null);
   const { scrollHandler, x } = useScrollHandler();
   return (
-    <View style={styles.container}>
+    <View style={tailwind("flex-1 grey90 relative")}>
       <Animated.ScrollView
         horizontal
         snapToInterval={width}
@@ -57,7 +46,7 @@ export default function Onboarding() {
           <Step key={i} {...step} />
         ))}
       </Animated.ScrollView>
-      <View style={styles.dotsContainer}>
+      <View style={tailwind("flex-row justify-center pb-16")}>
         {steps.map((_, i) => (
           <Dot key={i} current={new Animated.Node()} index={i} />
         ))}
