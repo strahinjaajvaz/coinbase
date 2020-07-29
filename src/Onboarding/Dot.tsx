@@ -1,20 +1,39 @@
 import React from "react";
 import { Svg, Circle, LinearGradient, Stop } from "react-native-svg";
-import Animated, { interpolate, Extrapolate } from "react-native-reanimated";
-import { View } from "react-native";
+import Animated, {
+  interpolate,
+  Extrapolate,
+  divide,
+} from "react-native-reanimated";
+import { Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 interface DotProps {
-  current: Animated.Node<number>;
+  x: Animated.Node<number>;
   index: number;
 }
 
-export default function Dot({ current, index }: DotProps) {
+export default function Dot({ index, x }: DotProps) {
+  const current = divide(x, width);
+  const opacity = interpolate(current, {
+    inputRange: [index - 1, index, index + 1],
+    outputRange: [0.5, 1, 0.5],
+    extrapolate: Extrapolate.CLAMP,
+  });
+  const scale = interpolate(current, {
+    inputRange: [index - 1, index, index + 1],
+    outputRange: [1, 1.25, 1],
+    extrapolate: Extrapolate.CLAMP,
+  });
   return (
-    <View
+    <Animated.View
       style={{
         height: 10,
         width: 10,
         marginHorizontal: 6,
+        opacity,
+        transform: [{ scale }],
       }}
     >
       <Svg height="100%" width="100%">
@@ -24,6 +43,6 @@ export default function Dot({ current, index }: DotProps) {
         </LinearGradient>
         <Circle cx="5" cy="5" r="5" fill="url(#grad)" />
       </Svg>
-    </View>
+    </Animated.View>
   );
 }

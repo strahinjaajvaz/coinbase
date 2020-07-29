@@ -24,7 +24,7 @@ export default function Step({
 }: StepProps) {
   return (
     <View style={[{ width }, tailwind("flex-1 mt-48")]}>
-      <View style={tailwind("px-3 items-center")}>
+      <View style={tailwind("px-4 items-center")}>
         <Image width={225} height={287} />
         <HeadingText text={label} />
         <Text

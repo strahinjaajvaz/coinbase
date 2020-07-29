@@ -60,7 +60,7 @@ export default function Onboarding() {
       </Animated.ScrollView>
       <View style={tailwind("flex-row justify-center pb-16")}>
         {steps.map((_, i) => (
-          <Dot key={i} current={new Animated.Node()} index={i} />
+          <Dot key={i} index={i} {...{ x }} />
         ))}
       </View>
     </View>
