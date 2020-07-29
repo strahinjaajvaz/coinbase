@@ -53,6 +53,7 @@ async function performAPICalls() {
 
 let customFonts = {
   "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
+  "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
 };
 
 async function downloadAssets() {

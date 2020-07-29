@@ -12,7 +12,7 @@ interface StepProps {
   label: string[];
   text: string;
   hasButton?: boolean;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 export default function Step({
@@ -20,7 +20,7 @@ export default function Step({
   image: { default: Image },
   text,
   hasButton,
-  onPress,
+  onPress = () => {},
 }: StepProps) {
   return (
     <View style={[{ width }, tailwind("flex-1 mt-48")]}>

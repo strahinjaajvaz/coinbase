@@ -1,10 +1,12 @@
 import React, { useRef } from "react";
-import { View, Dimensions, StyleSheet } from "react-native";
+import { View, Dimensions } from "react-native";
 import Animated from "react-native-reanimated";
 import { useScrollHandler } from "react-native-redash";
+
 import Step from "./Step";
 import Dot from "./Dot";
 import tailwind from "tailwind-rn";
+import Skip from "./Skip";
 
 const steps = [
   {
@@ -32,8 +34,17 @@ const { width } = Dimensions.get("window");
 export default function Onboarding() {
   const scrollReff = useRef<Animated.ScrollView>(null);
   const { scrollHandler, x } = useScrollHandler();
+
   return (
     <View style={tailwind("flex-1 grey90 relative")}>
+      <Skip
+        onPress={() =>
+          scrollReff.current
+            ?.getNode()
+            .scrollTo({ x: width * (steps.length - 1), animated: true })
+        }
+        {...{ x, steps: steps.length }}
+      />
       <Animated.ScrollView
         horizontal
         snapToInterval={width}
@@ -41,6 +52,7 @@ export default function Onboarding() {
         snapToAlignment="center"
         ref={scrollReff}
         showsHorizontalScrollIndicator={false}
+        {...scrollHandler}
       >
         {steps.map((step, i) => (
           <Step key={i} {...step} />
