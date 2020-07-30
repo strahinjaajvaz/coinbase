@@ -20,12 +20,16 @@ const styles = StyleSheet.create({
 interface ButtonProps {
   onPress: () => void;
   text: string;
+  disabled: boolean;
 }
 
-export default function Button({ text, onPress }: ButtonProps) {
+export default function Button({ text, onPress, disabled }: ButtonProps) {
   return (
     <TouchableOpacity {...{ onPress }}>
-      <LinearGradient colors={["#FD749B", "#281AC8"]} style={styles.cointainer}>
+      <LinearGradient
+        colors={["#FD749B", "#281AC8"]}
+        style={(styles.cointainer, { opacity: disabled ? 0.8 : 1 })}
+      >
         <Text style={styles.text}>{text.toUpperCase()}</Text>
       </LinearGradient>
     </TouchableOpacity>

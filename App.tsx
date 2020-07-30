@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
 
 import { SplashScreen as CoinbaseSplashScreen } from "./src/components";
-import { Onboarding } from "./src/Onboarding";
+// import { Onboarding } from "./src/Onboarding";
+import { AuthenticationStack } from "./src/Authentication";
 
 export default class App extends React.Component {
   state = {
@@ -38,7 +39,11 @@ export default class App extends React.Component {
       return <CoinbaseSplashScreen />;
     }
 
-    return <Onboarding />;
+    return (
+      <NavigationContainer>
+        <AuthenticationStack />
+      </NavigationContainer>
+    );
   }
 }
 

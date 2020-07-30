@@ -26,7 +26,7 @@ export default function Skip({ onPress, x, steps }: SkipProps) {
     >
       <Animated.View style={{ opacity }}>
         <Text
-          style={[{ fontFamily: "Poppins-Bold" }, tailwind("text-gray-600")]}
+          style={[{ fontFamily: "Poppins-Bold" }, tailwind("text-nobel")]}
         >{`Skip >>`}</Text>
       </Animated.View>
     </TouchableOpacity>
