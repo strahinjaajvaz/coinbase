@@ -15,13 +15,8 @@ export default function InputText({
   value,
 }: TextInputProps) {
   return (
-    <View className={"relative"}>
-      <TextInput
-        className={
-          "p-4 border border-gray82 w-64 rounded-lg text-nightRider text-sm"
-        }
-        {...{ onChangeText, value }}
-      />
+    <View>
+      <TextInput {...{ onChangeText, value }} />
       <Icon style={"absolute right-0 mt-3 mr-3"} />
     </View>
   );

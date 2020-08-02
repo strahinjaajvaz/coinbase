@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Text, Dimensions } from "react-native";
-import tailwind from "tailwind-rn";
+import { View, Text, Dimensions, StyleSheet } from "react-native";
 
 import HeadingText from "./HeadingText";
 import { Button } from "../components";
@@ -23,20 +22,30 @@ export default function Step({
   onPress = () => {},
 }: StepProps) {
   return (
-    <View style={[{ width }, tailwind("flex-1 mt-48")]}>
-      <View style={tailwind("px-4 items-center")}>
+    <View style={[{ width }, styles.container]}>
+      <View style={styles.subContaienr}>
         <Image width={225} height={287} />
         <HeadingText text={label} />
-        <Text
-          style={[
-            { fontFamily: "Poppins-Regular" },
-            tailwind("mb-3 text-base text-center"),
-          ]}
-        >
-          {text}
-        </Text>
+        <Text style={[styles.text]}>{text}</Text>
         {hasButton && <Button text="continue" {...{ onPress }} />}
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 160,
+  },
+  subContaienr: {
+    paddingHorizontal: 40,
+    alignItems: "center",
+  },
+  text: {
+    fontFamily: "Poppins-Regular",
+    marginBottom: 16,
+    color: "#333333",
+    textAlign: "center",
+  },
+});

@@ -1,6 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Text, Dimensions } from "react-native";
-import tailwind from "tailwind-rn";
+import { TouchableOpacity, Text, Dimensions, StyleSheet } from "react-native";
 import Animated, { interpolate, multiply, sub } from "react-native-reanimated";
 
 const { width } = Dimensions.get("window");
@@ -21,14 +20,26 @@ export default function Skip({ onPress, x, steps }: SkipProps) {
   });
   return (
     <TouchableOpacity
-      style={[tailwind("absolute right-0 top-0 mt-32 mr-10 z-10")]}
+      activeOpacity={1}
+      style={styles.container}
       {...{ onPress }}
     >
       <Animated.View style={{ opacity }}>
-        <Text
-          style={[{ fontFamily: "Poppins-Bold" }, tailwind("text-nobel")]}
-        >{`Skip >>`}</Text>
+        <Text style={styles.text}>{`Skip >>`}</Text>
       </Animated.View>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    position: "absolute",
+    right: 40,
+    top: 88,
+    zIndex: 10,
+  },
+  text: {
+    fontFamily: "Poppins-Bold",
+    color: "#979797",
+  },
+});

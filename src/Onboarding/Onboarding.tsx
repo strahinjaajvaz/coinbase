@@ -1,11 +1,10 @@
 import React, { useRef } from "react";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import { useScrollHandler } from "react-native-redash";
 
 import Step from "./Step";
 import Dot from "./Dot";
-import tailwind from "tailwind-rn";
 import Skip from "./Skip";
 
 const steps = [
@@ -36,7 +35,7 @@ export default function Onboarding() {
   const { scrollHandler, x } = useScrollHandler();
 
   return (
-    <View style={tailwind("flex-1 grey90 relative")}>
+    <View style={styles.container}>
       <Skip
         onPress={() =>
           scrollReff.current
@@ -58,7 +57,7 @@ export default function Onboarding() {
           <Step key={i} {...step} />
         ))}
       </Animated.ScrollView>
-      <View style={tailwind("flex-row justify-center pb-16")}>
+      <View style={styles.dots}>
         {steps.map((_, i) => (
           <Dot key={i} index={i} {...{ x }} />
         ))}
@@ -66,3 +65,16 @@ export default function Onboarding() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#E5E5E5",
+    position: "relative",
+  },
+  dots: {
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingBottom: 48,
+  },
+});

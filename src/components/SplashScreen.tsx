@@ -4,18 +4,6 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import Logo from "../../assets/Logo.svg";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  logo: {
-    width: 160,
-    height: 32,
-  },
-});
-
 export default function SplashScreen() {
   return (
     <LinearGradient
@@ -30,3 +18,15 @@ export default function SplashScreen() {
     </LinearGradient>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logo: {
+    width: 160,
+    height: 32,
+  },
+});
