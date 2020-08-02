@@ -4,7 +4,7 @@ import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { SplashScreen as CoinbaseSplashScreen } from "./src/components";
-// import { Onboarding } from "./src/Onboarding";
+import { Onboarding } from "./src/Onboarding";
 import { AuthenticationStack } from "./src/Authentication";
 
 export default class App extends React.Component {
@@ -41,7 +41,8 @@ export default class App extends React.Component {
 
     return (
       <NavigationContainer>
-        <AuthenticationStack />
+        {/* <AuthenticationStack /> */}
+        <Onboarding />
       </NavigationContainer>
     );
   }

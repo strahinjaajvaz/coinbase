@@ -25,7 +25,7 @@ const steps = [
     image: require("./assets/mobile_payments.svg"),
     label: ["You’re One Step", "Closer to Cashing", " Out Your Exchange"],
     text: "Our pay out process is the one of the fatest and guaranteed trusted",
-    onPress() {},
+    hasButton: true,
   },
 ];
 
