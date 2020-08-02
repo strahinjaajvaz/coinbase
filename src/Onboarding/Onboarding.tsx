@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { View, Dimensions, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import { useScrollHandler } from "react-native-redash";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Step from "./Step";
 import Dot from "./Dot";
@@ -25,6 +26,9 @@ const steps = [
     label: ["You’re One Step", "Closer to Cashing", " Out Your Exchange"],
     text: "Our pay out process is the one of the fatest and guaranteed trusted",
     hasButton: true,
+    async onPress() {
+      await AsyncStorage.setItem("onboardingCompleted", "true");
+    },
   },
 ];
 

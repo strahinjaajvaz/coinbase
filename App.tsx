@@ -1,15 +1,20 @@
 import React from "react";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
-import { NavigationContainer } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
+import { Provider } from "react-redux";
 
 import { SplashScreen as CoinbaseSplashScreen } from "./src/components";
-import { Onboarding } from "./src/Onboarding";
-import { AuthenticationStack } from "./src/Authentication";
+import Navigation from "./src/navigation/Navigation";
+
+import { createReduxStore, RootState } from "./src/redux/Reducers";
 
 export default class App extends React.Component {
-  state = {
+  state: { appIsReady: boolean; initialState: RootState } = {
     appIsReady: false,
+    initialState: {
+      user: { authenticated: false, onboardingCompleted: false },
+    },
   };
 
   async componentDidMount() {
@@ -28,10 +33,20 @@ export default class App extends React.Component {
   prepareResources = async () => {
     await performAPICalls();
     await downloadAssets();
+    const data = await loadAppData();
+    console.log("data", data);
 
-    this.setState({ appIsReady: true }, async () => {
-      await SplashScreen.hideAsync();
-    });
+    this.setState(
+      {
+        appIsReady: true,
+        initialState: {
+          user: { ...this.state.initialState.user, onboardingCompleted: data },
+        },
+      },
+      async () => {
+        await SplashScreen.hideAsync();
+      }
+    );
   };
 
   render() {
@@ -40,10 +55,9 @@ export default class App extends React.Component {
     }
 
     return (
-      <NavigationContainer>
-        {/* <AuthenticationStack /> */}
-        <Onboarding />
-      </NavigationContainer>
+      <Provider store={createReduxStore(this.state.initialState)}>
+        <Navigation />
+      </Provider>
     );
   }
 }
@@ -64,4 +78,8 @@ let customFonts = {
 
 async function downloadAssets() {
   await Font.loadAsync(customFonts);
+}
+
+async function loadAppData() {
+  return await AsyncStorage.getItem("onboardingCompleted");
 }

@@ -6,11 +6,16 @@ import {
 
 interface UserState {
   authenticated: boolean;
-  completedOnboarding: boolean;
+  onboardingCompleted: boolean;
 }
 
+const DEFAULT_USER_STATE: UserState = {
+  authenticated: false,
+  onboardingCompleted: false,
+};
+
 export default function UserReducer(
-  state: UserState,
+  state: UserState = DEFAULT_USER_STATE,
   action: UserActions
 ): UserState {
   switch (action.type) {
